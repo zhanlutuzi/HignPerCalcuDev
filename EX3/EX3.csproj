@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>C:\Application\MapGIS\MapGIS 10\Program\</OutputPath>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="MapGIS.GeoDataBase">
+      <HintPath>C:\Application\MapGIS\MapGIS 10\Program\MapGIS.GeoDataBase.dll</HintPath>
+    </Reference>
+    <Reference Include="MapGIS.GeoMap">
+      <HintPath>C:\Application\MapGIS\MapGIS 10\Program\MapGIS.GeoMap.dll</HintPath>
+    </Reference>
+    <Reference Include="MapGIS.GeoObjects">
+      <HintPath>C:\Application\MapGIS\MapGIS 10\Program\MapGIS.GeoObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="MapGIS.GISControl">
+      <HintPath>C:\Application\MapGIS\MapGIS 10\Program\MapGIS.GISControl.dll</HintPath>
+    </Reference>
+    <Reference Include="MapGIS.UI.Controls">
+      <HintPath>C:\Application\MapGIS\MapGIS 10\Program\MapGIS.UI.Controls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
