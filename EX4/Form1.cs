@@ -40,9 +40,16 @@ namespace EX4
             var threadOne = new Thread(() => GetSFCIs(SFCLs, listView1, 1));
             threadOne.Name = "ThreadOne";
             var threadTwo = new Thread(() => GetSFCIs(SFCLs, listView2, 2));
+            threadTwo.Name = "ThreadTwo";
+            var threadThr = new Thread(() => GetSFCIs(SFCLs, listView3, 3));
+            threadThr.Name = "ThreadThr";
+            var threadFour = new Thread(() => GetSFCIs(SFCLs, listView4, 4));
+            threadFour.Name = "ThreadFour";
 
             threadOne.Start();
             threadTwo.Start();
+            threadThr.Start();
+            threadFour.Start();
         }
 
         public void GetSFCIs(SFeatureCls SFCls,ListView listView,int pre_or_next)
@@ -68,9 +75,9 @@ namespace EX4
             int objCount = SFCls.Count;
             int n = 0;
             long id = 0;
-            double task_count = objCount / 2;
+            double task_count = objCount / 4;
 
-            while(n<objCount)
+            while(n <objCount)
             {
                 Rcd = SFCls.GetAtt(id);
                 if (Rcd == null)
@@ -96,9 +103,39 @@ namespace EX4
                         }
                     }
                 }
+                if (pre_or_next == 2)
+                {
+                    if (n > task_count && n<=(2*task_count))
+                    {
+                        ListViewItem items = null;
+                        items = listView.Items.Add(id.ToString());
+                        for (int i = 0; i < num; i++)
+                        {
+                            Fld = Flds.GetItem(i);
+                            string name = Fld.FieldName;
+                            object val = Rcd.get_FldVal(name);
+                            ObjectVal(items, val);
+                        }
+                    }
+                }
+                if (pre_or_next == 3)
+                {
+                    if (n > (2*task_count) && n <= (3 * task_count))
+                    {
+                        ListViewItem items = null;
+                        items = listView.Items.Add(id.ToString());
+                        for (int i = 0; i < num; i++)
+                        {
+                            Fld = Flds.GetItem(i);
+                            string name = Fld.FieldName;
+                            object val = Rcd.get_FldVal(name);
+                            ObjectVal(items, val);
+                        }
+                    }
+                }
                 else
                 {
-                    if (n > task_count)
+                    if (n > 3*task_count)
                     {
                         ListViewItem items = null;
                         items = listView.Items.Add(id.ToString());
