@@ -90,13 +90,19 @@ namespace EX6
             threadOne.Name = "ThreadOne";
             var threadTwo = new Thread(() => Buffer(sfcls, GDB, "threadTwo_buffer", 2));
             threadTwo.Name = "ThreadTwo";
+            var threadThr = new Thread(() => Buffer(sfcls, GDB, "threadThree_buffer", 3));
+            threadThr.Name = "ThreadThr";
+            var threadFour = new Thread(() => Buffer(sfcls, GDB, "threadFour_buffer", 4));
+            threadFour.Name = "ThreadFour";
 
             threadOne.Start();
             threadTwo.Start();
+            threadThr.Start();
+            threadFour.Start();
 
         }
 
-        public void Buffer(SFeatureCls resource_sfcls, DataBase GDB, string name, int L_or_R)
+        public void Buffer(SFeatureCls resource_sfcls, DataBase GDB, string name, int regionID)
         {
             QueryDef _QueryDef = null;
             Rect rect = null;
@@ -109,30 +115,92 @@ namespace EX6
             RegInfo _RegInfo = null; //线的图形信息
             rect = new Rect();
 
-            if (L_or_R == 1)
+            double recXMin = resource_sfcls.Range.XMin;
+            double recXMax = resource_sfcls.Range.XMax;
+            double recYMin = resource_sfcls.Range.YMin;
+            double recYMax = resource_sfcls.Range.YMax;
+            double halfx = (resource_sfcls.Range.XMax - resource_sfcls.Range.XMin) / 2;
+            double halfy = (resource_sfcls.Range.YMax - resource_sfcls.Range.YMin) / 2;
+
+            if (regionID == 1)
             {
-                //左边的矩形框
-                rect.XMax = resource_sfcls.Range.XMin + (resource_sfcls.Range.XMax - resource_sfcls.Range.XMin) / 2;
-                rect.YMax = resource_sfcls.Range.YMax;
-                rect.YMin = resource_sfcls.Range.YMin;
-                rect.XMin = resource_sfcls.Range.XMin;
+                // 左上角的矩形
+                // 相交查询
+                rect.XMax = recXMin + halfx;
+                rect.YMax = recYMax;
+                rect.YMin = recYMin + halfy;
+                rect.XMin = recXMin;
                 mode = SpaQueryMode.Intersect;
                 _RegInfo = new RegInfo();
                 //设置面的图形信息
-                _RegInfo.FillClr = 168;//黄色
+                _RegInfo.FillClr = 168;
+
 
             }
-            else
+            if (regionID == 2)
             {
-                rect.XMax = resource_sfcls.Range.XMax;
-                rect.YMax = resource_sfcls.Range.YMax;
-                rect.YMin = resource_sfcls.Range.YMin;
-                rect.XMin = resource_sfcls.Range.XMin + (resource_sfcls.Range.XMax - resource_sfcls.Range.XMin) / 2;
+                // 右上角的矩形
+                // 包含查询
+                rect.XMax = recXMax;
+                rect.YMax = recYMax;
+                rect.YMin = recYMin + halfy;
+                rect.XMin = recXMin + halfx;
                 mode = SpaQueryMode.Contain;
                 _RegInfo = new RegInfo();
                 //设置面的图形信息
-                _RegInfo.FillClr = 376;//绿色
+                _RegInfo.FillClr = 100;
             }
+            if (regionID == 3)
+            {
+                // 左下角的矩形
+                // 区域外查询
+                rect.XMax = recXMin + halfx;
+                rect.YMax = recYMin + halfy;
+                rect.YMin = recYMin;
+                rect.XMin = recXMin;
+                mode = SpaQueryMode.Intersect;
+                _RegInfo = new RegInfo();
+                //设置面的图形信息
+                _RegInfo.FillClr = 250;
+            }
+            if (regionID == 4)
+            {
+                // 右下角的矩形
+                // 最小外包矩形查询
+                rect.XMax = recXMax;
+                rect.YMax = recYMin + halfy;
+                rect.YMin = recYMin;
+                rect.XMin = recXMin + halfx;
+                mode = SpaQueryMode.MBRIntersect;
+                _RegInfo = new RegInfo();
+                //设置面的图形信息
+                _RegInfo.FillClr = 300;
+            }
+
+            //if (L_or_R == 1)
+            //{
+            //    //左边的矩形框
+            //    rect.XMax = resource_sfcls.Range.XMin + (resource_sfcls.Range.XMax - resource_sfcls.Range.XMin) / 2;
+            //    rect.YMax = resource_sfcls.Range.YMax;
+            //    rect.YMin = resource_sfcls.Range.YMin;
+            //    rect.XMin = resource_sfcls.Range.XMin;
+            //    mode = SpaQueryMode.Intersect;
+            //    _RegInfo = new RegInfo();
+            //    //设置面的图形信息
+            //    _RegInfo.FillClr = 168;//黄色
+
+            //}
+            //else
+            //{
+            //    rect.XMax = resource_sfcls.Range.XMax;
+            //    rect.YMax = resource_sfcls.Range.YMax;
+            //    rect.YMin = resource_sfcls.Range.YMin;
+            //    rect.XMin = resource_sfcls.Range.XMin + (resource_sfcls.Range.XMax - resource_sfcls.Range.XMin) / 2;
+            //    mode = SpaQueryMode.Contain;
+            //    _RegInfo = new RegInfo();
+            //    //设置面的图形信息
+            //    _RegInfo.FillClr = 376;//绿色
+            //}
 
             //将符合查询条件的要素存入RecordSet，然后进行遍历可以得到每一个要素的信息
             _QueryDef = new QueryDef();
@@ -207,6 +275,11 @@ namespace EX6
             this.mapCtrl.ActiveMap = activeMap;
             this.mapCtrl.Restore();
             this._Tree.WorkSpace.EndUpdateTree();
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
