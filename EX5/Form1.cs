@@ -43,12 +43,18 @@ namespace EX5
             threadOne.Name = "ThreadOne";
             var threadTwo = new Thread(() => statistics(SFCls, listView2, 2));
             threadTwo.Name = "ThreadTwo";
+            var threadThr = new Thread(() => statistics(SFCls, listView3, 3));
+            threadThr.Name = "ThreadThr";
+            var threadFour = new Thread(() => statistics(SFCls, listView4, 4));
+            threadFour.Name = "ThreadFour";
 
             threadOne.Start();
             threadTwo.Start();
+            threadThr.Start();
+            threadFour.Start();
         }
 
-        private void statistics(SFeatureCls resource_sfcls, ListView listView, int L_or_R)
+        private void statistics(SFeatureCls resource_sfcls, ListView listView, int regionID)
         {
             RecordSet _RecordSet = null;
             IGeometry _Geometry = null;
@@ -60,23 +66,53 @@ namespace EX5
             long oid = 0;
             double length = 0;
 
-            if (L_or_R == 1)
+            double recXMin = resource_sfcls.Range.XMin;
+            double recXMax = resource_sfcls.Range.XMax;
+            double recYMin = resource_sfcls.Range.YMin;
+            double recYMax = resource_sfcls.Range.YMax;
+            double halfx = (resource_sfcls.Range.XMax - resource_sfcls.Range.XMin) / 2;
+            double halfy = (resource_sfcls.Range.YMax - resource_sfcls.Range.YMin) / 2;
+
+            if (regionID == 1)
             {
-                //左边的矩形框
-                rect.XMax = resource_sfcls.Range.XMin + (resource_sfcls.Range.XMax - resource_sfcls.Range.XMin) / 2;
-                rect.YMax = resource_sfcls.Range.YMax;
-                rect.YMin = resource_sfcls.Range.YMin;
-                rect.XMin = resource_sfcls.Range.XMin;
+                // 左上角的矩形
+                // 相交查询
+                rect.XMax = recXMin + halfx;
+                rect.YMax = recYMax;
+                rect.YMin = recYMin + halfy;
+                rect.XMin = recXMin;
                 mode = SpaQueryMode.Intersect;
 
             }
-            else
+            if (regionID == 2)
             {
-                rect.XMax = resource_sfcls.Range.XMax;
-                rect.YMax = resource_sfcls.Range.YMax;
-                rect.YMin = resource_sfcls.Range.YMin;
-                rect.XMin = resource_sfcls.Range.XMin + (resource_sfcls.Range.XMax - resource_sfcls.Range.XMin) / 2;
+                // 右上角的矩形
+                // 包含查询
+                rect.XMax = recXMax;
+                rect.YMax = recYMax;
+                rect.YMin = recYMin + halfy;
+                rect.XMin = recXMin + halfx;
                 mode = SpaQueryMode.Contain;
+            }
+            if(regionID == 3)
+            {
+                // 左下角的矩形
+                // 区域外查询
+                rect.XMax = recXMin + halfx;
+                rect.YMax = recYMin + halfy;
+                rect.YMin = recYMin;
+                rect.XMin = recXMin;
+                mode = SpaQueryMode.Intersect;
+            }
+            if(regionID == 4)
+            {
+                // 右下角的矩形
+                // 最小外包矩形查询
+                rect.XMax = recXMax;
+                rect.YMax = recYMin + halfy;
+                rect.YMin = recYMin;
+                rect.XMin = recXMin + halfx;
+                mode = SpaQueryMode.MBRIntersect;
             }
 
             //在ListView1控件第一列增加“OID”字段

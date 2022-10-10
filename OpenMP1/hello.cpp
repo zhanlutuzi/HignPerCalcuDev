@@ -11,7 +11,6 @@ double A1[n][n], A2[n][n];
 void serialLU();
 
 // ²¢ÐÐ³ÌÐò
-
 void multiLU();
 
 double H1(int r, int i)
@@ -110,3 +109,5 @@ int main()
 	printf("speedup = %.3f", diffTime1 / diffTime2);
 	return 0;
 }
+
+
