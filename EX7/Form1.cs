@@ -73,13 +73,19 @@ namespace EX7
             SFeatureCls cliped_sfcls = null;
             SFeatureCls clip_sfcls1 = null;
             SFeatureCls clip_sfcls2 = null;
+            SFeatureCls clip_sfcls3 = null;
+            SFeatureCls clip_sfcls4 = null;
             cliped_sfcls = new SFeatureCls(GDB);
             clip_sfcls1 = new SFeatureCls(GDB);
             clip_sfcls2 = new SFeatureCls(GDB);
+            clip_sfcls3 = new SFeatureCls(GDB);
+            clip_sfcls4 = new SFeatureCls(GDB);
 
             cliped_sfcls.Open("道路", 1);
             clip_sfcls1.Open("矩形框1", 1);
             clip_sfcls2.Open("矩形框2", 1);
+            clip_sfcls3.Open("矩形框3", 1);
+            clip_sfcls4.Open("矩形框4", 1);
 
             //创建结果简单要素类
             SFeatureCls ResultSFeatureCls1 = new SFeatureCls(GDB);
@@ -88,14 +94,29 @@ namespace EX7
             SFeatureCls ResultSFeatureCls2 = new SFeatureCls(GDB);
             id = ResultSFeatureCls2.Create("thread2_clip", cliped_sfcls.GeomType, 0, 0, null);
 
+            //创建结果简单要素类
+            SFeatureCls ResultSFeatureCls3 = new SFeatureCls(GDB);
+            id = ResultSFeatureCls3.Create("thread3_clip", cliped_sfcls.GeomType, 0, 0, null);
+
+            //创建结果简单要素类
+            SFeatureCls ResultSFeatureCls4 = new SFeatureCls(GDB);
+            id = ResultSFeatureCls4.Create("thread4_clip", cliped_sfcls.GeomType, 0, 0, null);
+
             Control.CheckForIllegalCrossThreadCalls = false;
             var threadOne = new Thread(() => Clip(cliped_sfcls, clip_sfcls1, ResultSFeatureCls1));
             threadOne.Name = "ThreadOne";
             var threadTwo = new Thread(() => Clip(cliped_sfcls, clip_sfcls2, ResultSFeatureCls2));
             threadTwo.Name = "ThreadTwo";
+            var threadThr = new Thread(() => Clip(cliped_sfcls, clip_sfcls3, ResultSFeatureCls3));
+            threadThr.Name = "ThreadThr";
+            var threadFour = new Thread(() => Clip(cliped_sfcls, clip_sfcls4, ResultSFeatureCls4));
+            threadFour.Name = "ThreadFour";
 
             threadOne.Start();
             threadTwo.Start();
+            threadThr.Start();
+            threadFour.Start();
+
         }
 
         public void Clip(SFeatureCls cliped_sfcls, SFeatureCls clip_sfcls, SFeatureCls ResultSFeatureCls)
