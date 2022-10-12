@@ -60,6 +60,7 @@ namespace EX9
             DataTable dt = new DataTable();
             DataTable dt1 = new DataTable();
             DataTable dt2 = new DataTable();
+            DataTable dt3 = new DataTable();
             dt.Columns.Add("行号", typeof(int));
             dt.Columns.Add("列号", typeof(int));
             dt.Columns.Add("像元值", typeof(double));
@@ -69,6 +70,9 @@ namespace EX9
             dt2.Columns.Add("行号", typeof(int));
             dt2.Columns.Add("列号", typeof(int));
             dt2.Columns.Add("像元值", typeof(double));
+            dt3.Columns.Add("行号", typeof(int));
+            dt3.Columns.Add("列号", typeof(int));
+            dt3.Columns.Add("像元值", typeof(double));
 
             string[] rows = File.ReadAllLines(@"D:\Desktop\code\Learning\HignPerCalcuDev\HignPerCalcuDev\Pro1\txt1-0.txt");
             foreach (string row in rows)
@@ -83,10 +87,16 @@ namespace EX9
                 dt1.Rows.Add(row1.Split(','));
                 dt2.Rows.Add(row1.Split(','));
             }
+            string[] rows2 = File.ReadAllLines(@"D:\Desktop\code\Learning\HignPerCalcuDev\HignPerCalcuDev\Pro1\txt1-2.txt");
+            foreach (string row2 in rows2)
+            {
+                dt3.Rows.Add(row2.Split(','));
+            }
 
             dataGridView1.DataSource = dt;
             dataGridView2.DataSource = dt1;
             dataGridView3.DataSource = dt2;
+            dataGridView4.DataSource = dt3;
         }
     }
 }
