@@ -20,14 +20,18 @@ namespace EX11
         {
             CutImg cut1 = new CutImg();
             CutImg cut2 = new CutImg();
+            CutImg cut3 = new CutImg();
 
             cut1.cut("1.tif","range1");
             cut2.cut("2.tif","range2");
+            cut3.cut("3.tif", "range3");
 
             string url1 = @"D:\Desktop\code\Learning\HignPerCalcuDev\HignPerCalcuDev\EX11\result\1.tif";//进程1裁剪的结果
             string url2 = @"D:\Desktop\code\Learning\HignPerCalcuDev\HignPerCalcuDev\EX11\result\2.tif";//进程2裁剪的结果
+            string url3 = @"D:\Desktop\code\Learning\HignPerCalcuDev\HignPerCalcuDev\EX11\result\3.tif";//进程3裁剪的结果
             this.pictureBox1.Load(url1);
             this.pictureBox2.Load(url2);
+            this.pictureBox3.Load(url3);
         }
     }
 }
