@@ -10,6 +10,10 @@
 *.userosscache
 *.sln.docstates
 
+# MapGISfile
+*.TDF
+*.mut
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

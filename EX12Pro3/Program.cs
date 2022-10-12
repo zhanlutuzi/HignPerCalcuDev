@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 
-namespace EX12_pro2
+namespace EX12_Pro1
 {
     class Program
     {
@@ -25,20 +25,20 @@ namespace EX12_pro2
             double ymax = 3563243.44965588;
             int num = 1;
             WebClient client = new WebClient();
-            double width17 = (y2 - y1) / Math.Pow(2, 16);
-            double L17min = Math.Floor((xmin - x1) / width17);
-            double H17min = Math.Floor((y2 - ymax) / width17);
-            double L17max = Math.Floor((xmax - x1) / width17);
-            double H17max = Math.Floor((y2 - ymin) / width17);
-            Console.WriteLine("17级" + "," + H17min + "," + H17max + "," + L17min + "," + L17max);
-            for (int i = Convert.ToInt32(H17min); i < Convert.ToInt32(H17max) + 1; i++)
+            double width18 = (x2 - x1) / Math.Pow(2, 17);
+            double L18min = Math.Floor((xmin - x1) / width18);
+            double H18min = Math.Floor((y2 - ymax) / width18);
+            double L18max = Math.Floor((xmax - x1) / width18);
+            double H18max = Math.Floor((y2 - ymin) / width18);
+            Console.WriteLine("18级" + "," + H18min + "," + H18max + "," + L18min + "," + L18max);
+            for (int i = Convert.ToInt32(H18min); i < Convert.ToInt32(H18max) + 1; i++)
             {
-                for (int j = Convert.ToInt32(L17min); j < Convert.ToInt32(L17max) + 1; j++)
+                for (int j = Convert.ToInt32(L18min); j < Convert.ToInt32(L18max) + 1; j++)
                 {
-                    string filename = 17 + "-" + num + "." + "png";
+                    string filename = 18 + "-" + num + "." + "png";
                     num = num + 1;
                     string dir = @"D:\Desktop\code\Learning\HignPerCalcuDev\HignPerCalcuDev\EX12\export\" + filename;
-                    string url = "http://localhost:6163/igs/rest/mrms/tile/TILE/" + 16 + "/" + i + "/" + j;
+                    string url = "http://localhost:6163/igs/rest/mrms/tile/TILE/" + (18 - 1) + "/" + i + "/" + j;
                     client.DownloadFile(url, dir);
                 }
             }

@@ -38,7 +38,7 @@ namespace EX12_Pro1
                     string filename = 16 + "-" + num + "." + "png";
                     num = num + 1;
                     string dir = @"D:\Desktop\code\Learning\HignPerCalcuDev\HignPerCalcuDev\EX12\export\" + filename;
-                    string url = "http://localhost:6163/igs/rest/mrms/tile/瓦片地图/" + (16 - 1) + "/" + i + "/" + j;
+                    string url = "http://localhost:6163/igs/rest/mrms/tile/TILE/" + (16 - 1) + "/" + i + "/" + j;
                     client.DownloadFile(url, dir);
                 }
             }
