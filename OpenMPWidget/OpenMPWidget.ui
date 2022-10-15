@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OpenMPWidgetClass</class>
+ <widget class="QMainWindow" name="OpenMPWidgetClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>704</width>
+    <height>502</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>OpenMPWidget</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="PIbtn">
+          <property name="text">
+           <string>蒙卡罗比算法计算圆周率</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="matrixbtn">
+          <property name="text">
+           <string>LU矩阵分解</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>欢迎来到OpenMP并行程序演示示例：
+
+- 点击左侧按钮进入对应程序
+
+- 本程序旨在演示多核并行计算的加速效果
+
+- 用户可以自定义线程数并查看执行速度
+</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="OpenMPWidget.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -31,13 +31,16 @@ namespace EX3Form
                 //获取当前第一个地图
                 Map map = maps.GetMap(0);
 
-                var threadOne = new Thread(() => ToSlices(map, 0, 3, "D:/Desktop/code/Learning/HignPerCalcuDev/HignPerCalcuDev/EX3/thread1/"));
+                var threadOne = new Thread(() => ToSlices(map, 0, 1, "D:/Desktop/code/Learning/HignPerCalcuDev/HignPerCalcuDev/EX3/thread1/"));
                 threadOne.Name = "ThreadOne";
-                var threadTwo = new Thread(() => ToSlices(map, 4, 4, "D:/Desktop/code/Learning/HignPerCalcuDev/HignPerCalcuDev/EX3/thread2/"));
+                var threadTwo = new Thread(() => ToSlices(map, 2, 3, "D:/Desktop/code/Learning/HignPerCalcuDev/HignPerCalcuDev/EX3/thread2/"));
                 threadTwo.Name = "ThreadTwo";
+                var threadThr = new Thread(() => ToSlices(map, 4, 4, "D:/Desktop/code/Learning/HignPerCalcuDev/HignPerCalcuDev/EX3/thread3/"));
+                threadThr.Name = "ThreadThr";
 
                 threadOne.Start();
                 threadTwo.Start();
+                threadThr.Start();
             }
         }
 

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <OutputPath>D:\Desktop\code\Learning\HignPerCalcuDev\HignPerCalcuDev\EX13\bin\external</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="MapGIS.GeoDataBase">
+      <HintPath>C:\Application\MapGIS\MapGIS 10\Program\MapGIS.GeoDataBase.dll</HintPath>
+    </Reference>
+    <Reference Include="MapGIS.RasAnalysis">
+      <HintPath>C:\Application\MapGIS\MapGIS 10\Program\MapGIS.RasAnalysis.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
