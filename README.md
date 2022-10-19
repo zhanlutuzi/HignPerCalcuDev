@@ -7,3 +7,11 @@
 - 实现了矩阵LU分解
 - 实现了蒙卡罗比法计算圆周率
 
+# 编译运行环境
+
+- Visual Studio 2019
+- `QT`5.15
+- `MapGIS 10.5` 基础开发授权
+- `OpenMP2.0`
+
+注：`MapGIS`的程序需要生成在`MapGIS`安装目录下的`Program`文件夹下
